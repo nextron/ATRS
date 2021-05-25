@@ -1,0 +1,44 @@
+﻿@model List<ATRS.Context.Passenger>
+@{
+    ViewBag.Title = "Book";
+}
+
+<h2>Book Flight</h2>
+
+<h4>
+    Flight Number: @TempData["FlightNumber"] || Source: @TempData["FlightOrigin"] || Destination: @TempData["FlightDestination"]
+</h4>
+    @if (@TempData["Layover"] != null)
+    {<h4>Layover: @TempData["Layover"]</h4>}
+
+
+    @using (Html.BeginForm("ConfirmBooking", "Reservation", FormMethod.Post))
+    {
+<div class="container">
+    <div class="form-group">
+        <label>Flight Number</label>
+        <input type="text" name="FlightNumber" value="@TempData["FlightNumber"]" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>List of Passengers</label>
+        <select name="PassengerID" class="form-control">
+            @foreach (var item in Model)
+            {
+                <option value="@item.PassengerID" class="form-control">@item.PassengerName</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Ticket Type</label>
+        <select name="Ticket" class="form-control">
+            <option value="Economy" class="form-control">Economy</option>
+            <option value="Business" class="form-control">Business</option>
+            <option value="First" class="form-control">First</option>
+        </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success">Reserve</button>
+            <h4>If you are not a customer @Html.ActionLink("Click here.", "AddPassenger", "Passenger")</h4>
+        </div>
+    </div>
+    }

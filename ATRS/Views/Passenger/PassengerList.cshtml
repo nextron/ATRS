@@ -1,0 +1,28 @@
+﻿@model List<ATRS.Context.Passenger>
+@{
+    ViewBag.Title = "PassengerList";
+}
+
+<h2>Passengers List</h2>
+<h4>If your name is not listed below, @Html.ActionLink("Click here to Add", "AddPassenger", "Passenger")</h4>
+<table class="table table-hover">
+    <tr>
+        <th>Passenger ID</th>
+        <th>Passenger Name</th>
+        <th>Passport No.</th>
+        <th>Mobile No.</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.PassengerID</td>
+            <td>@item.PassengerName</td>
+            <td>@item.PassportNo</td>
+            <td>@item.MobileNo</td>
+            <td> 
+                <a href="@Url.Action("AddPassenger", new { @item.PassengerID, @item.PassengerName, @item.PassportNo, @item.MobileNo})" class="btn btn-info">Edit</a>
+                <a href = "@Url.Action("DeletePassenger", new { @item.PassengerID })" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="atrsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Flight">
+          <Key>
+            <PropertyRef Name="FlightNumber" />
+          </Key>
+          <Property Name="FlightNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Aircraft" Type="varchar" MaxLength="20" />
+          <Property Name="Origin" Type="varchar" MaxLength="20" />
+          <Property Name="Layover" Type="varchar" MaxLength="20" />
+          <Property Name="Destination" Type="varchar" MaxLength="20" />
+          <Property Name="Airline" Type="varchar" MaxLength="30" />
+          <Property Name="Startdatetime" Type="datetime" />
+          <Property Name="Enddatetime" Type="datetime" />
+          <Property Name="Layoverdatetime" Type="int" />
+        </EntityType>
+        <EntityType Name="FlightTrack">
+          <Key>
+            <PropertyRef Name="TravelID" />
+          </Key>
+          <Property Name="TravelID" Type="int" Nullable="false" />
+          <Property Name="FlightNumber" Type="varchar" MaxLength="20" />
+          <Property Name="FlightDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Passenger">
+          <Key>
+            <PropertyRef Name="PassengerID" />
+          </Key>
+          <Property Name="PassengerID" Type="int" Nullable="false" />
+          <Property Name="PassengerName" Type="varchar" MaxLength="50" />
+          <Property Name="PassportNo" Type="varchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationNumber" />
+          </Key>
+          <Property Name="ReservationNumber" Type="int" Nullable="false" />
+          <Property Name="PassengerID" Type="int" />
+          <Property Name="Ticket" Type="varchar" MaxLength="50" />
+          <Property Name="FlightNumber" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__FlightTra__Fligh__49C3F6B7">
+          <End Role="Flight" Type="Self.Flight" Multiplicity="0..1" />
+          <End Role="FlightTrack" Type="Self.FlightTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="FlightNumber" />
+            </Principal>
+            <Dependent Role="FlightTrack">
+              <PropertyRef Name="FlightNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__Fligh__3B75D760">
+          <End Role="Flight" Type="Self.Flight" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="FlightNumber" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="FlightNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__Passe__3A81B327">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="PassengerID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="PassengerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="atrsModelStoreContainer">
+          <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FlightTrack" EntityType="Self.FlightTrack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passenger" EntityType="Self.Passenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__FlightTra__Fligh__49C3F6B7" Association="Self.FK__FlightTra__Fligh__49C3F6B7">
+            <End Role="Flight" EntitySet="Flight" />
+            <End Role="FlightTrack" EntitySet="FlightTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__Fligh__3B75D760" Association="Self.FK__Reservati__Fligh__3B75D760">
+            <End Role="Flight" EntitySet="Flight" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__Passe__3A81B327" Association="Self.FK__Reservati__Passe__3A81B327">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="atrsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Flight">
+          <Key>
+            <PropertyRef Name="FlightNumber" />
+          </Key>
+          <Property Name="FlightNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Aircraft" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Origin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Layover" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Destination" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Airline" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Startdatetime" Type="DateTime" Precision="3" />
+          <Property Name="Enddatetime" Type="DateTime" Precision="3" />
+          <Property Name="Layoverdatetime" Type="Int32" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Fligh__3B75D760" FromRole="Flight" ToRole="Reservation" />
+          <NavigationProperty Name="FlightTracks" Relationship="atrsModel.FK__FlightTra__Fligh__403A8C7D" FromRole="Flight" ToRole="FlightTrack" />
+        </EntityType>
+        <EntityType Name="Passenger">
+          <Key>
+            <PropertyRef Name="PassengerID" />
+          </Key>
+          <Property Name="PassengerID" Type="Int32" Nullable="false" />
+          <Property Name="PassengerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PassportNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="Int64" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK__Reservati__Passe__3A81B327" FromRole="Passenger" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationNumber" />
+          </Key>
+          <Property Name="ReservationNumber" Type="Int32" Nullable="false" />
+          <Property Name="PassengerID" Type="Int32" />
+          <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FlightNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Flight" Relationship="Self.FK__Reservati__Fligh__3B75D760" FromRole="Reservation" ToRole="Flight" />
+          <NavigationProperty Name="Passenger" Relationship="Self.FK__Reservati__Passe__3A81B327" FromRole="Reservation" ToRole="Passenger" />
+        </EntityType>
+        <Association Name="FK__Reservati__Fligh__3B75D760">
+          <End Role="Flight" Type="Self.Flight" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="FlightNumber" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="FlightNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Reservati__Passe__3A81B327">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="0..1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="PassengerID" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="PassengerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="atrsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Flights" EntityType="Self.Flight" />
+          <EntitySet Name="Passengers" EntityType="Self.Passenger" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <AssociationSet Name="FK__Reservati__Fligh__3B75D760" Association="Self.FK__Reservati__Fligh__3B75D760">
+            <End Role="Flight" EntitySet="Flights" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Reservati__Passe__3A81B327" Association="Self.FK__Reservati__Passe__3A81B327">
+            <End Role="Passenger" EntitySet="Passengers" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <EntitySet Name="FlightTracks" EntityType="atrsModel.FlightTrack" />
+          <AssociationSet Name="FK__FlightTra__Fligh__403A8C7D" Association="atrsModel.FK__FlightTra__Fligh__403A8C7D">
+            <End Role="Flight" EntitySet="Flights" />
+            <End Role="FlightTrack" EntitySet="FlightTracks" />
+          </AssociationSet>
+          <FunctionImport Name="MostVisitedCity" />
+          <FunctionImport Name="MostVisitedCityGenerate" />
+        </EntityContainer>
+        <EntityType Name="FlightTrack">
+          <Key>
+            <PropertyRef Name="TravelID" />
+          </Key>
+          <Property Name="TravelID" Type="Int32" Nullable="false" />
+          <Property Name="FlightNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Flight" Relationship="atrsModel.FK__FlightTra__Fligh__403A8C7D" FromRole="FlightTrack" ToRole="Flight" />
+          <Property Name="FlightDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__FlightTra__Fligh__403A8C7D">
+          <End Type="atrsModel.Flight" Role="Flight" Multiplicity="0..1" />
+          <End Type="atrsModel.FlightTrack" Role="FlightTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flight">
+              <PropertyRef Name="FlightNumber" />
+            </Principal>
+            <Dependent Role="FlightTrack">
+              <PropertyRef Name="FlightNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="atrsModelStoreContainer" CdmEntityContainer="atrsEntities">
+          <EntitySetMapping Name="Flights">
+            <EntityTypeMapping TypeName="atrsModel.Flight">
+              <MappingFragment StoreEntitySet="Flight">
+                <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+                <ScalarProperty Name="Aircraft" ColumnName="Aircraft" />
+                <ScalarProperty Name="Origin" ColumnName="Origin" />
+                <ScalarProperty Name="Layover" ColumnName="Layover" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="Airline" ColumnName="Airline" />
+                <ScalarProperty Name="Startdatetime" ColumnName="Startdatetime" />
+                <ScalarProperty Name="Enddatetime" ColumnName="Enddatetime" />
+                <ScalarProperty Name="Layoverdatetime" ColumnName="Layoverdatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passengers">
+            <EntityTypeMapping TypeName="atrsModel.Passenger">
+              <MappingFragment StoreEntitySet="Passenger">
+                <ScalarProperty Name="PassengerID" ColumnName="PassengerID" />
+                <ScalarProperty Name="PassengerName" ColumnName="PassengerName" />
+                <ScalarProperty Name="PassportNo" ColumnName="PassportNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="atrsModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="ReservationNumber" ColumnName="ReservationNumber" />
+                <ScalarProperty Name="PassengerID" ColumnName="PassengerID" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+                <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FlightTracks">
+            <EntityTypeMapping TypeName="atrsModel.FlightTrack">
+              <MappingFragment StoreEntitySet="FlightTrack">
+                <ScalarProperty Name="FlightDate" ColumnName="FlightDate" />
+                <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+                <ScalarProperty Name="TravelID" ColumnName="TravelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

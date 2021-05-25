@@ -1,0 +1,24 @@
+﻿@model  List<ATRS.Context.Reservation>
+@{
+    ViewBag.Title = "Reservations";
+}
+
+<h2>Reservations</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>Reservation ID</th>
+        <th>Passenger ID</th>
+        <th>Ticket Type</th>
+        <th>Flight Number</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ReservationNumber</td>
+            <td>@item.PassengerID</td>
+            <td>@item.Ticket</td>
+            <td>@item.FlightNumber</td>
+        </tr>
+    }
+</table>

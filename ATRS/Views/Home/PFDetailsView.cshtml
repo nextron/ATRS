@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "PFDetailsView";
+}
+
+<h2>Details as per ReservationID: @TempData["id"]</h2>
+<h4>Passenger Name: @TempData["PName"]</h4>
+<h4>
+    Passport NUmber: @TempData["Ppassport"]
+</h4>
+<h4>
+    Mobile Number: @TempData["PMobile"]
+</h4>
+<h4>
+    Flight Name: @TempData["FName"]
+</h4>
+<h4>
+    Source: @TempData["FSource"]
+</h4>
+<h4>
+    Destination: @TempData["FDestination"]
+</h4>
+<h4>
+    Flight Start Time: @TempData["FStart"]
+</h4>
+<h4>
+    Layover: @TempData["FLayover"]
+</h4>
+<h4>
+    Total Travel Time: @TempData["JourneyTime"]
+</h4>
+@Html.ActionLink("Back to Home", "Index", "Home")

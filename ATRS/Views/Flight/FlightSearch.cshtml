@@ -1,0 +1,27 @@
+﻿@model ATRS.Context.Flight
+@{
+    ViewBag.Title = "FlightSearch";
+}
+
+<h2>FlightSearch</h2>
+
+@using (Html.BeginForm("FlightList", "Flight", FormMethod.Post)) 
+{ 
+<div class="container">
+    <div class="form-group">
+        <label>Source</label>
+        @Html.TextBoxFor(x => x.Origin, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Destination</label>
+        @Html.TextBoxFor(x => x.Destination, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Date of Travel</label>
+        @Html.TextBoxFor(x => x.Startdatetime, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Search</button>
+    </div>
+</div>
+}

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "TravelHistory";
+}
+
+<h2>TravelHistory</h2>
+
+@using (Html.BeginForm("TravelHistoryView", "Home", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            <label>Passenger Name</label>
+            <input type="text" name="PassengerName" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Passport Number</label>
+            <input type="text" name="PassportNo" class="form-control">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default">Submit</button>
+        </div>
+    </div>
+}
+@Html.ActionLink("Back to Home", "Index", "Home")

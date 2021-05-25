@@ -1,0 +1,32 @@
+﻿@model List<ATRS.Models.TravelHistory>
+@{
+    ViewBag.Title = "TravelHistoryView";
+}
+
+<h2>Travel History</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th>Flight Number</th>
+        <th>Passenger ID</th>
+        <th>Passenger Name</th>
+        <th>Passport Number</th>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Ticket</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.FlightNumber</td>
+            <td>@item.PassengerID</td>
+            <td>@item.PassengerName</td>
+            <td>@item.PassportNo</td>
+            <td>@item.Origin</td>
+            <td>@item.Destination</td>
+            <td>@item.Ticket</td>
+        </tr>
+    }
+</table>
+
+@Html.ActionLink("Back to Home", "Index", "Home")
